@@ -90,7 +90,7 @@ def upload_image(request):
                 context['form'] = form
                 invalid_image_size_popup(request, size_status)  # message tells user of size error
                 return render(request, "uploadfile.html", context)  # refresh page
-            # validate metadata
+            # Validate metadata
             meta_status = validate_metadata(Path('.' + obj.img.url))
             # add image metadata to database
             if meta_status == "valid":
@@ -105,6 +105,7 @@ def upload_image(request):
                 # message tells user what metadata is missing
                 return render(request, "uploadfile.html", context)  # refresh page
 
+            # Validates that the photo is correct for challenge.
             if is_photo_valid_for_challenge(gps, date_taken):
                 obj.save()
                 return redirect('successful_upload')
@@ -130,18 +131,16 @@ def successful_upload(request):
 def signup(request):
     """A view for registration of a new user. If the form passes the validators,
     a new user will be created. By default, the password is both hashed and salted."""
-    agreement = False
     if request.method == 'POST':
         form = SignupForm(request.POST)
-        agreement = request.POST.get("checkbox", False)
-        if form.is_valid() and (agreement != False):
+        if form.is_valid():
             # Sanitise the inputs
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             User.objects.create_user(username=username,
                                      password=password)
-            return HttpResponseRedirect('/polls/login')  
-    else: 
+            return HttpResponseRedirect('/polls/login')
+    else:
         form = SignupForm()
     return render(request, 'signup.html', {'form': form})
 
@@ -196,6 +195,7 @@ def leaderboards(request):
 
     return render(request, 'leaderboards.html', {'scores': sorted_d})
 
+
 def profile(request):
     """where a user can manage their account, including account and post deletion
     and changing profile pictures"""
@@ -206,27 +206,28 @@ def profile(request):
     score = 0
     total_photos = 0
     for image in user_images:
-        score+=image.score
-        total_photos+=1
+        score += image.score
+        total_photos += 1
     if request.method == 'POST':
         p_form = ProfileUpdateForm(request.POST,
                                    request.FILES,
                                    instance=request.user.profile)
         if p_form.is_valid():
             p_form.save()
-            return redirect('profile') # Redirect back to profile page
+            return redirect('profile')  # Redirect back to profile page
 
     else:
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
         'p_form': p_form,
-        'images':user_images,
-        'score':score,
-        'total_photos':total_photos
+        'images': user_images,
+        'score': score,
+        'total_photos': total_photos
     }
 
     return render(request, 'profile.html', context)
+
 
 def view_profile(request, username=None):
     """view a user's profile"""
@@ -238,21 +239,22 @@ def view_profile(request, username=None):
     score = 0
     total_photos = 0
     for image in user_images:
-        score+=image.score
-        total_photos+=1
+        score += image.score
+        total_photos += 1
 
     context = {
-        'images':user_images,
-        'score':score,
-        'total_photos':total_photos,
-        'view_user':user
+        'images': user_images,
+        'score': score,
+        'total_photos': total_photos,
+        'view_user': user
     }
 
     return render(request, 'viewprofile.html', context)
 
-def delete_photo(request,photo_id=None):
+
+def delete_photo(request, photo_id=None):
     """delete a user's photo by replacing it with a placeholder"""
-    photo_to_delete=Image.objects.get(id=photo_id)
+    photo_to_delete = Image.objects.get(id=photo_id)
     photo_to_delete.img = str(Path('./picture/error.jpg'))
     photo_to_delete.title = "This photo was removed"
     photo_to_delete.description = "User deleted the photo"
@@ -260,15 +262,17 @@ def delete_photo(request,photo_id=None):
 
     return redirect('profile')
 
-def delete_account(request,username=None):
+
+def delete_account(request, username=None):
     """delete a user's account"""
-    user_to_delete=User.objects.get(username=username)
+    user_to_delete = User.objects.get(username=username)
     user_images = Image.objects.filter(user=user_to_delete)
     for img in user_images:
         img.delete()
     user_to_delete.delete()
 
     return HttpResponseRedirect('/polls/')
+
 
 def vote(request, photo_id):
     """user votes for a photo"""
@@ -282,12 +286,13 @@ def vote(request, photo_id):
         new_vote.already_voted = True
 
         photo.score += 10
-        #adds user to photoS
+        # adds user to photoS
         photo.user_votes.add(user)
         photo.save()
         new_vote.save()
         return redirect('feed')
     return redirect('feed')
+
 
 def unvote(request, photo_id):
     """user revokes their vote for a photo"""
@@ -302,7 +307,7 @@ def unvote(request, photo_id):
         revoke_vote.delete()
 
         photo.score -= 10
-        #remove user from photo
+        # remove user from photo
         photo.user_votes.remove(user)
         photo.save()
 
