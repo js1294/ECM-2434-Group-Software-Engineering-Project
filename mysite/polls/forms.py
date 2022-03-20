@@ -9,7 +9,6 @@ from .validate import check_user_unique, validate_upper_lower, \
 from .models import Profile
 
 
-
 class ImagefieldForm(forms.Form):
     """The form used to upload a new image."""
     name = forms.CharField(max_length=200)
@@ -27,6 +26,7 @@ class SignupForm(forms.Form):
     password = forms.CharField(validators=[validate_password, validate_upper_lower,
                                            validate_special, validate_number],
                                label="", max_length=30, widget=forms.PasswordInput())
+    checkbox = forms.BooleanField()
 
 
 class LoginForm(forms.Form):
@@ -52,8 +52,10 @@ class LoginForm(forms.Form):
         user = authenticate(username=username, password=password)
         return user
 
+
 class ProfileUpdateForm(forms.ModelForm):
     """Update user profile"""
+
     class Meta:
         """The meta class"""
         model = Profile
