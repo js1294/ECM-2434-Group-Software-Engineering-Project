@@ -6,5 +6,5 @@ gunicorn
 psycopg2
 tensorflow
 keras
-opencv-python
+opencv-python-headless
 pytz
