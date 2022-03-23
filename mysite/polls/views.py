@@ -80,9 +80,9 @@ def invalid_metadata_popup(request, meta_status):
 
 
 def invalid_image_size_popup(request, size_status):
-    """If the size status is below 5mb , a popup will display the error."""
+    """If the size status is below 20mb , a popup will display the error."""
     if size_status == "invalid":
-        messages.info(request, 'Photo must be less than 5mb')
+        messages.info(request, 'Photo must be less than 20mb')
 
 
 def check_badge(user):
@@ -321,9 +321,9 @@ def display_feed(request):
     if not request.user.is_authenticated:
         return redirect('home')
     # images are displayed in a random order to keep the feed fresh every time
-    all_images = Image.objects.all().order_by('?')
+    challenge_images = Image.objects.filter(challenge__active=True).order_by('?')
 
-    return render(request, 'feed.html', {'images': all_images})
+    return render(request, 'feed.html', {'images': challenge_images})
 
 
 def leaderboards(request):
