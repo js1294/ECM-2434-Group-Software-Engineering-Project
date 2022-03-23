@@ -2,6 +2,7 @@
 from keras.applications.xception import Xception
 from keras.preprocessing import image
 from keras.applications.xception import preprocess_input, decode_predictions
+from pathlib import Path
 import numpy as np
 import cv2 as cv
 # load the model
@@ -49,13 +50,13 @@ def ai_classify_image(img_path, subject):
 
 def ai_face_recognition(image_path):
 	"""ai to find and recognise how many faces are in an image"""
-	original_image = cv.imread(image_path)
+	original_image = cv.imread(('./media/feed/'+image_path.name))
 	# Convert color image to grayscale for Viola-Jones
 	grayscale_image = cv.cvtColor(original_image, cv.COLOR_BGR2GRAY)
 	# Load the classifier and create a cascade object for face detection
-	face_cascade = cv.CascadeClassifier('haarcascade_frontalface_alt.xml')
+	face_cascade = cv.CascadeClassifier(cv.data.haarcascades+'haarcascade_frontalface_alt.xml')
 	# additional cascade object for bodies 
-	body_cascade = cv.CascadeClassifier('haarcascade_fullbody.xml')
+	body_cascade = cv.CascadeClassifier(cv.data.haarcascades+'haarcascade_fullbody.xml')
 	# analyse the image in multiple scales to detect faces
 	detected_faces = face_cascade.detectMultiScale(
 		grayscale_image,
@@ -81,3 +82,5 @@ def show_faces(image,faces):
 	cv.imshow("Faces found", image)
 	cv.waitKey(0)
 	cv.destroyAllWindows()
+
+#print(ai_face_recognition('/media/feed/picture/cat_neural_net.jpg'))
