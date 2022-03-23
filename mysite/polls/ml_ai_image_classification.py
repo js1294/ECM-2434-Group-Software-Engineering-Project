@@ -38,6 +38,26 @@ def ai_classify_image(img_path, subject):
 		subjects.append('tile')
 		subjects.append('bar')
 		subjects.append('dome')
+	elif subject == 'wildlife':
+		subjects.append('insect')
+		subjects.append('forest')
+		subjects.append('grass')
+		subjects.append('flower')
+		subjects.append('rose')
+		subjects.append('daffodil')
+		subjects.append('leaf')
+		subjects.append('tree')
+		subjects.append('sky')
+		subjects.append('sun')
+		subjects.append('pond')
+		subjects.append('water')
+		subjects.append('lake')
+		subjects.append('bird')
+		subjects.append('animal')
+		subjects.append('duck')
+		subjects.append('cat')
+		subjects.append('fox')
+		subjects.append('rabbit')
 
 	# see if the subject is one of the features that has been classified
 	for subject in subjects:
@@ -82,5 +102,3 @@ def show_faces(image,faces):
 	cv.imshow("Faces found", image)
 	cv.waitKey(0)
 	cv.destroyAllWindows()
-
-#print(ai_face_recognition('/media/feed/picture/cat_neural_net.jpg'))
