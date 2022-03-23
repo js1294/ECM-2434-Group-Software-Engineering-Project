@@ -18,7 +18,7 @@ Points are rewarded for completing challenges and for winning them. Challenge wi
 These points can be used to unlock stickers and tags to use on photos, as well as on weekly and all-time leaderboards showing who the most prominent photographers are.  
 Photos can be viewed in the photo feed, which shows the latest and highest-rated photos for each live challenge.  
 
-Features currently implemented
+Features
 -------------------------------
 
 User signup and login  
@@ -78,7 +78,7 @@ To deploy the project onto a Google Cloud server, use the following guide:
 Once the project is running, users will be able to navigate to the server URL /polls (e.g. http://127.0.0.1:8000/polls/) and access the web-app without needing to install anything.  
 
 Create an admin account by running the create superuser command in the command line.  
-The admin account can be accessed at server URL /admin (e.g. http://127.0.0.1:8000/admin).
+The admin account can be accessed at server URL /admin (e.g. http://127.0.0.1:8000/admin).  
 
 License
 -------
@@ -87,6 +87,9 @@ License
 
 Other info
 ----------
+
+Trello Board:  
+https://trello.com/b/2nyvjzjR/group-software-project-group-27  
 
 Commit Activity:  
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/js1294/ECM-2434-Group-Software-Engineering-Project">  
