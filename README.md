@@ -37,14 +37,10 @@ CSS styling
 Photo moderation and removal  
 Gamekeeper/admin privileges
 Leaderboard
-Features to be added
----------------------
-
 Photo challenges that require users to traverse the university campus to meet the criteria   
 Points for completing and winning challenges    
-Stickers and tags    
-Expansion of challenges e.g. utilising AR  
-Expansion of CSS
+Stickers and tags      
+Artifical Intelligence to classify images and find faces  
 
 Requirements
 -------------
@@ -62,7 +58,9 @@ tensorflow library:
 keras library:  
 	pip install keras  
 opencv library:  
-	pip install opencv-python
+	pip install opencv-python  
+pytz library:  
+	pip install pytz  
 	  
 If you wish to host a dedicated server to run the web-app off of, you will also need a hosting service e.g. Google Cloud SDK, Digital Ocean  
 
