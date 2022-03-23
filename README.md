@@ -61,7 +61,7 @@ opencv library:
 	pip install opencv-python  
 pytz library:  
 	pip install pytz  
-	  
+
 If you wish to host a dedicated server to run the web-app off of, you will also need a hosting service e.g. Google Cloud SDK, Digital Ocean  
 
 Running the Project:
@@ -77,7 +77,8 @@ To deploy the project onto a Google Cloud server, use the following guide:
 	  
 Once the project is running, users will be able to navigate to the server URL /polls (e.g. http://127.0.0.1:8000/polls/) and access the web-app without needing to install anything.  
 
-The admin account can be accessed at server URL /admin (e.g. http://127.0.0.1:8000/admin), with username: admin and password: admin
+Create an admin account by running the create superuser command in the command line.  
+The admin account can be accessed at server URL /admin (e.g. http://127.0.0.1:8000/admin).
 
 License
 -------
