@@ -2,6 +2,7 @@
 from keras.applications.xception import Xception
 from keras.preprocessing import image
 from keras.applications.xception import preprocess_input, decode_predictions
+from pathlib import Path
 import numpy as np
 import cv2 as cv
 # load the model
@@ -12,6 +13,7 @@ def ai_classify_image(img_path, subject):
 	classification is done via the Viola-Jones algorithm"""
 	subjects = []
 	subjects.append(subject)
+	img_path = './media/feed/'+img_path.name
 	# load the image as size 299,299 for the model to process
 	img = image.load_img(img_path, target_size=(299, 299))
 	#############################################
@@ -37,6 +39,26 @@ def ai_classify_image(img_path, subject):
 		subjects.append('tile')
 		subjects.append('bar')
 		subjects.append('dome')
+	elif subject == 'wildlife':
+		subjects.append('insect')
+		subjects.append('forest')
+		subjects.append('grass')
+		subjects.append('flower')
+		subjects.append('rose')
+		subjects.append('daffodil')
+		subjects.append('leaf')
+		subjects.append('tree')
+		subjects.append('sky')
+		subjects.append('sun')
+		subjects.append('pond')
+		subjects.append('water')
+		subjects.append('lake')
+		subjects.append('bird')
+		subjects.append('animal')
+		subjects.append('duck')
+		subjects.append('cat')
+		subjects.append('fox')
+		subjects.append('rabbit')
 
 	# see if the subject is one of the features that has been classified
 	for subject in subjects:
@@ -49,28 +71,28 @@ def ai_classify_image(img_path, subject):
 
 def ai_face_recognition(image_path):
 	"""ai to find and recognise how many faces are in an image"""
-	original_image = cv.imread(image_path)
+	original_image = cv.imread(('./media/feed/'+image_path.name))
 	# Convert color image to grayscale for Viola-Jones
 	grayscale_image = cv.cvtColor(original_image, cv.COLOR_BGR2GRAY)
 	# Load the classifier and create a cascade object for face detection
-	face_cascade = cv.CascadeClassifier('haarcascade_frontalface_alt.xml')
+	face_cascade = cv.CascadeClassifier(cv.data.haarcascades+'haarcascade_frontalface_alt.xml')
 	# additional cascade object for bodies 
-	body_cascade = cv.CascadeClassifier('haarcascade_fullbody.xml')
+	# 
 	# analyse the image in multiple scales to detect faces
 	detected_faces = face_cascade.detectMultiScale(
 		grayscale_image,
-		scaleFactor=1.1,
-		minNeighbors=5,
+		scaleFactor=1.2,
+		minNeighbors=3,
 		minSize=(30,30))
 
 	# do the same for bodies- in case faces are covered
-	detected_bodies = body_cascade.detectMultiScale(grayscale_image)
+	#detected_bodies = body_cascade.detectMultiScale(grayscale_image)
 
 	# uncomment the line below to see what faces are detected while developing
 	# show_faces(original_image,detected_faces)
 
 	# return the number of detected faces/bodies by returning the highest value for leniency
-	return max(len(detected_faces),len(detected_bodies))
+	return len(detected_faces)
 
 def show_faces(image,faces):
 	"""draw a rectangle around the faces and display- useful for developers to see results"""
@@ -81,3 +103,5 @@ def show_faces(image,faces):
 	cv.imshow("Faces found", image)
 	cv.waitKey(0)
 	cv.destroyAllWindows()
+
+#print(ai_classify_image(Path('..'+'/media/feed/picture/cat_neural_net.jpg'),'cat'))

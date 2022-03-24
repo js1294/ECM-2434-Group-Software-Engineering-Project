@@ -24,18 +24,19 @@ def get_img_metadata(fname):
     return get_gps(fname), get_time(fname)
 
 
-def is_photo_valid_for_challenge(request, gps, date_taken, challenge, img_path, ):
+def is_photo_valid_for_challenge(request, gps, date_taken, challenge, img_path):
     """Checks to see if the photo was taken within 2km of campus
     raise ValidationError(gps)."""
     if challenge.subject == "group":
         # a group is more than one person
-        if ai_face_recognition(img_path) < 0:
+        if ai_face_recognition(img_path) <= 0:
             messages.info(request, 'AI did not find multiple faces')
             return False
     elif challenge.subject == '' or challenge.subject == None or challenge.subject == 'test':
         # if there is no subject it cannot be analysed by the ai
         pass
     else:
+        #img_path = Path('..'+img_path.url)
         if ai_classify_image(img_path, challenge.subject) == False:
             messages.info(request, 'AI could not find a ' + str(challenge.subject))
             return False
@@ -79,9 +80,9 @@ def invalid_metadata_popup(request, meta_status):
 
 
 def invalid_image_size_popup(request, size_status):
-    """If the size status is below 5mb , a popup will display the error."""
+    """If the size status is below 20mb , a popup will display the error."""
     if size_status == "invalid":
-        messages.info(request, 'Photo must be less than 5mb')
+        messages.info(request, 'Photo must be less than 20mb')
 
 
 def check_badge(user):
@@ -221,7 +222,6 @@ def upload_image(request):
             # Create the table object
             obj = Image(
                 challenge=challenge,
-                title=challenge.name,
                 description=desc,
                 img=img,
                 gps_coordinates=(0, 0),
@@ -254,7 +254,7 @@ def upload_image(request):
                 return render(request, "uploadfile.html", context)  # refresh page
 
             if is_photo_valid_for_challenge(request, gps, obj.taken_date, challenge,
-                                            Path('.' + obj.img.url)):
+                                            obj.img):
                 obj.save()
                 return redirect('successful_upload')
             messages.info(request, 'Photo is either too far from challenge'
@@ -321,9 +321,9 @@ def display_feed(request):
     if not request.user.is_authenticated:
         return redirect('home')
     # images are displayed in a random order to keep the feed fresh every time
-    all_images = Image.objects.all().order_by('?')
+    challenge_images = Image.objects.filter(challenge__active=True).order_by('?')
 
-    return render(request, 'feed.html', {'images': all_images})
+    return render(request, 'feed.html', {'images': challenge_images})
 
 
 def leaderboards(request):
