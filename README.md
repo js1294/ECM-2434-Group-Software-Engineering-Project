@@ -22,18 +22,10 @@ Features
 -------------------------------
 
 User signup and login  
-<img alt="Sign up" src="https://github.com/js1294/ECM-2434-Group-Software-Engineering-Project/blob/photoFeed/docs/images/signup.png">  
-<img alt="Sign in" src="https://github.com/js1294/ECM-2434-Group-Software-Engineering-Project/blob/photoFeed/docs/images/signin.png">  
-  
-Photo uploading to database  
-<img alt="Photo uploading" src="https://github.com/js1294/ECM-2434-Group-Software-Engineering-Project/blob/photoFeed/docs/images/uploadphoto.png">
-<img alt="Upload success" src="https://github.com/js1294/ECM-2434-Group-Software-Engineering-Project/blob/photoFeed/docs/images/uploadsuccess.png">  
-  
+Photo uploading to database     
 Acquiring date and location metadata from photos  
-Photo feed with the latest and highest-rated challenge submissions  
-<img alt="Photo feed" src="https://github.com/js1294/ECM-2434-Group-Software-Engineering-Project/blob/photoFeed/docs/images/feed1.png">  
-CSS styling  
-<img alt="CSS" src="https://github.com/js1294/ECM-2434-Group-Software-Engineering-Project/blob/photoFeed/docs/images/feed2.png">  
+Photo feed with the latest and highest-rated challenge submissions   
+CSS styling   
 Photo moderation and removal  
 Gamekeeper/admin privileges
 Leaderboard
@@ -61,7 +53,7 @@ opencv library:
 	pip install opencv-python  
 pytz library:  
 	pip install pytz  
-
+  
 If you wish to host a dedicated server to run the web-app off of, you will also need a hosting service e.g. Google Cloud SDK, Digital Ocean  
 
 Running the Project:
@@ -88,8 +80,11 @@ License
 Other info
 ----------
 
-Trello Board:  
-https://trello.com/b/2nyvjzjR/group-software-project-group-27  
+Link to deployed app  
+https://django-deploy-3kpp3.ondigitalocean.app/polls/feed
+
+Link to trello board  
+https://trello.com/b/2nyvjzjR/group-software-project-group-27
 
 Commit Activity:  
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/js1294/ECM-2434-Group-Software-Engineering-Project">  
