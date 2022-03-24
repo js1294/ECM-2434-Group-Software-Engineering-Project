@@ -13,6 +13,7 @@ def ai_classify_image(img_path, subject):
 	classification is done via the Viola-Jones algorithm"""
 	subjects = []
 	subjects.append(subject)
+	img_path = './media/feed/'+img_path.name
 	# load the image as size 299,299 for the model to process
 	img = image.load_img(img_path, target_size=(299, 299))
 	#############################################
@@ -102,3 +103,5 @@ def show_faces(image,faces):
 	cv.imshow("Faces found", image)
 	cv.waitKey(0)
 	cv.destroyAllWindows()
+
+#print(ai_classify_image(Path('..'+'/media/feed/picture/cat_neural_net.jpg'),'cat'))
