@@ -9,7 +9,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.contrib.auth.models import User
 from django.test.client import Client
 from .models import Profile, Image, Challenge
-from . import validate, image_metadata
+from . import validate, image_metadata, ml_ai_image_classification
 
 class TestAdminPanel(TestCase):
 	"""test admin functionality"""
@@ -196,8 +196,8 @@ class TestValidate(TestCase):
 		#a small tempfile should be valid
 		self.assertEqual('valid',validate.validate_image_size(image.name))
 
-		#a large image should be invalid
-		self.assertEqual('invalid',validate.validate_image_size(self.large_image_path))
+		#large image under 20mb should be valid
+		self.assertEqual('valid',validate.validate_image_size(self.large_image_path))
 
 	def test_validate_metadata(self):
 		"""test that metadata is validated"""
@@ -227,7 +227,7 @@ class TestImage(TestCase):
 		"""create a test user and a temporary test image to be stored in an Image model object"""
 		self.create_user()
 		self.img_obj = Image.objects.create(user=self.user
-							,title="testimg",
+							,
 							description="desc",
 							img=SimpleUploadedFile(name='test_image.jpg',
 							content='',
@@ -245,7 +245,6 @@ class TestImage(TestCase):
 
 	def test_image(self):
 		"""test that Image objects are created and stored correctly"""
-		self.assertEqual("testimg",self.img_obj.title)
 		self.assertEqual("desc",self.img_obj.description)
 		if isinstance(self.img_obj.img,ImageFieldFile) == False:
 			self.fail("img in Image model not stored correctly")
