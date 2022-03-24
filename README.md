@@ -18,28 +18,17 @@ Points are rewarded for completing challenges and for winning them. Challenge wi
 These points can be used to unlock stickers and tags to use on photos, as well as on weekly and all-time leaderboards showing who the most prominent photographers are.  
 Photos can be viewed in the photo feed, which shows the latest and highest-rated photos for each live challenge.  
 
-Features currently implemented
+Features
 -------------------------------
 
 User signup and login  
-<img alt="Sign up" src="https://github.com/js1294/ECM-2434-Group-Software-Engineering-Project/blob/photoFeed/docs/images/signup.png">  
-<img alt="Sign in" src="https://github.com/js1294/ECM-2434-Group-Software-Engineering-Project/blob/photoFeed/docs/images/signin.png">  
-  
-Photo uploading to database  
-<img alt="Photo uploading" src="https://github.com/js1294/ECM-2434-Group-Software-Engineering-Project/blob/photoFeed/docs/images/uploadphoto.png">
-<img alt="Upload success" src="https://github.com/js1294/ECM-2434-Group-Software-Engineering-Project/blob/photoFeed/docs/images/uploadsuccess.png">  
-  
+Photo uploading to database     
 Acquiring date and location metadata from photos  
-Photo feed with the latest and highest-rated challenge submissions  
-<img alt="Photo feed" src="https://github.com/js1294/ECM-2434-Group-Software-Engineering-Project/blob/photoFeed/docs/images/feed1.png">  
-CSS styling  
-<img alt="CSS" src="https://github.com/js1294/ECM-2434-Group-Software-Engineering-Project/blob/photoFeed/docs/images/feed2.png">  
+Photo feed with the latest and highest-rated challenge submissions   
+CSS styling   
 Photo moderation and removal  
 Gamekeeper/admin privileges
 Leaderboard
-Features to be added
----------------------
-
 Photo challenges that require users to traverse the university campus to meet the criteria   
 Points for completing and winning challenges    
 Stickers and tags    
@@ -62,7 +51,9 @@ tensorflow library:
 keras library:  
 	pip install keras  
 opencv library:  
-	pip install opencv-python
+	pip install opencv-python  
+pytz library:  
+	pip install pytz  
 	  
 If you wish to host a dedicated server to run the web-app off of, you will also need a hosting service e.g. Google Cloud SDK, Digital Ocean  
 
@@ -88,6 +79,12 @@ License
 
 Other info
 ----------
+
+Link to deployed app  
+https://django-deploy-3kpp3.ondigitalocean.app/polls/feed
+
+Link to trello board  
+https://trello.com/b/2nyvjzjR/group-software-project-group-27
 
 Commit Activity:  
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/js1294/ECM-2434-Group-Software-Engineering-Project">  
